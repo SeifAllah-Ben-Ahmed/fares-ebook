@@ -1,0 +1,226 @@
+/* FARES Couture CSS - Elegant Black & Gold Theme */
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Times New Roman', Times, serif;
+  background-color: #000;
+  color: #fff;
+  overflow-x: hidden;
+  text-align: center;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container Styles */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Header Styles */
+header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-top: -5vh; /* Pull the entire header upward */
+}
+
+/* Content Layout Structure */
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+}
+
+/* Additional Structural Adjustments for Centered Layout */
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+  margin-bottom:-20px; /* Reduced space between logo and navigation */
+  transition: all 0.5s ease;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  position: relative;
+  top: -24vh; /* Shift everything more upward */
+}
+
+.img-responsive:hover {
+  transform: scale(1.02);
+}
+
+/* Text Styles */
+.intro-text {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin-left: 10px;
+}
+
+/* Navigation Menu Styling */
+.titles-align {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px; /* Reduced margin to bring closer to logo */
+  flex-wrap: nowrap; /* Prevent wrapping to ensure single line */
+  position: relative;
+  width: 100%;
+}
+
+.t0, .t1, .t2 {
+  display: inline-block;
+  margin: 0 10px;
+  vertical-align: middle;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Hover Effects for Menu Items */
+a img {
+  transition: all 0.3s ease;
+}
+
+a:hover img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .img-responsive {
+    width: 80%;
+    margin-bottom:-20px; /* Further reduced for mobile */
+  }
+  
+  /* Keep navigation in a single line on mobile */
+  .titles-align {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px; /* Minimal spacing on mobile */
+  }
+  
+  .t0, .t1, .t2 {
+    margin: 0 5px;
+  }
+  
+  /* Scale down navigation images slightly for better fit */
+  .t1 img, .t2 img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Adjust vertical position for mobile */
+  #container {
+    top: -13vh; /* Less extreme but still higher on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .img-responsive {
+    width: 90%;
+    margin-bottom:-20px; /* Minimal spacing on small mobile */
+  }
+  
+  /* Ensure navigation stays on one line even on very small screens */
+  .titles-align {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 5px;
+    margin-top: 2px; /* Almost no space on smallest screens */
+  }
+  
+  .t0, .t1, .t2 {
+    margin: 0 3px;
+    transform: scale(0.9); /* Slightly reduce size on very small screens */
+  }
+  
+  .t0 img {
+    height: 14px; /* Slightly reduce the size of the divider */
+  }
+  
+  /* Adjust vertical positioning for mobile */
+  #container {
+    top: -13vh; /* Slightly less extreme on smallest screens */
+  }
+}
+
+/* Animation for Fade In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#container {
+  animation: fadeIn 8s;
+}
+
+/* Gold Accent Color - Used for Hover States */
+.gold-text {
+  color: #d4af37;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #000000;
+}
+
+/* Optional: Adding a subtle grain texture to the background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzR7G6VFjTMyYGzOWxJwbEz+XeNcT8yS+s8eY8TZymYwRk8Vxs/2fNGMZRoiIeCbqH6oAU6SSWeUVoAMAAAAASUVORK5CYII=');
+  opacity: 0.02;
+  z-index: -1;
+}

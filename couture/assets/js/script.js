@@ -1,3 +1,106 @@
+/* -------------------------------------------------------------
+   Mise a l'echelle du livre sur petits ecrans.
+
+   #magazine a une geometrie figee (926x650, pages de 463x650)
+   imposee par turn.js et par les images de pages (463x650 elles
+   aussi). Plutot que de casser cette geometrie avec des offsets
+   en dur, on met #book-stage (livre + pagination) a l'echelle
+   avec un transform: scale() calcule depuis le viewport, et on
+   reduit les commandes (#test) uniquement si l'ecran est trop
+   court -- typiquement un mobile en paysage.
+
+   window.__bookScale est relu par turn.js (cf. le patch
+   "book scale" dans assets/js/turn.js) : les coordonnees
+   pointeur arrivent en pixels ecran, il faut les diviser par
+   l'echelle pour retomber sur les coordonnees internes du livre,
+   sinon la detection des coins et le glisser-tourner tombent a
+   cote.
+------------------------------------------------------------- */
+var BOOK_WIDTH = 926;         // largeur figee de #magazine
+var CONTROLS_MIN_SCALE = 0.7; // en dessous, les fleches ne sont plus cliquables
+
+window.__bookScale = 1;
+
+// Applique (ou retire) un transform: scale() et rattrape la hauteur
+// occupee dans le flux, qu'un transform ne modifie pas.
+function scaleBlock(el, scale, naturalHeight) {
+
+  if (scale >= 1) {
+    el.style.webkitTransform = '';
+    el.style.transform = '';
+    el.style.marginBottom = '';
+    return;
+  }
+
+  el.style.webkitTransform = 'scale(' + scale + ')';
+  el.style.transform = 'scale(' + scale + ')';
+  el.style.marginBottom = -Math.round(naturalHeight * (1 - scale)) + 'px';
+}
+
+function bookFit() {
+
+  var stage = document.getElementById('book-stage');
+  var controls = document.getElementById('test');
+  if (!stage) { return; }
+
+  // On repart de la mise en page naturelle pour mesurer : offsetTop et
+  // offsetHeight ignorent le transform, mais pas les marges negatives
+  // posees au passage precedent.
+  stage.style.marginTop = '';
+  stage.style.marginBottom = '';
+  if (controls) { controls.style.marginBottom = ''; }
+
+  var stageHeight = stage.offsetHeight;
+  if (!stageHeight) { return; }
+
+  var controlsHeight = controls ? controls.offsetHeight : 0;
+  // Espace entre le bas du livre et les commandes : c'est une marge, elle
+  // n'est donc pas mise a l'echelle et doit etre comptee telle quelle.
+  var gap = controls
+    ? Math.max(0, controls.offsetTop - stage.offsetTop - stageHeight)
+    : 0;
+
+  var bodyStyle = window.getComputedStyle(document.body);
+  var availHeight = window.innerHeight
+    - (parseFloat(bodyStyle.paddingTop) || 0)
+    - (parseFloat(bodyStyle.paddingBottom) || 0);
+
+  // 1. La largeur commande : le livre doit tenir dans le viewport.
+  var bookScale = Math.min(1, document.documentElement.clientWidth / BOOK_WIDTH);
+  var controlsScale = 1;
+
+  // 2. Si la hauteur ne suit pas (mobile en paysage), on reduit d'abord les
+  //    commandes -- sans les rendre intouchables -- puis le livre.
+  if (stageHeight * bookScale + gap + controlsHeight > availHeight) {
+    if (controlsHeight) {
+      controlsScale = Math.max(
+        CONTROLS_MIN_SCALE,
+        Math.min(1, (availHeight - gap - stageHeight * bookScale) / controlsHeight)
+      );
+    }
+    bookScale = Math.min(
+      bookScale,
+      (availHeight - gap - controlsHeight * controlsScale) / stageHeight
+    );
+  }
+  if (!(bookScale > 0)) { bookScale = 1; }
+
+  window.__bookScale = bookScale;
+
+  scaleBlock(stage, bookScale, stageHeight);
+  if (controls) { scaleBlock(controls, controlsScale, controlsHeight); }
+
+  // 3. Centrage vertical de l'ensemble livre + commandes s'il reste de la place.
+  var slack = availHeight
+    - (stageHeight * bookScale + gap + controlsHeight * controlsScale);
+  if (bookScale < 1 && slack > 0) {
+    stage.style.marginTop = Math.round(slack / 2) + 'px';
+  }
+}
+
+$(bookFit);
+$(window).on('resize orientationchange', bookFit);
+
 
 
 $(function(){
@@ -22,13 +125,13 @@ $( "#menu" ).click(function() {
 		if(page == 1 && $(this).data('done')){
 			mag.addClass('centerStart').removeClass('centerEnd');
 		}
-		else if (page == 62 && $(this).data('done')){
+		else if (page == 60 && $(this).data('done')){
 			mag.addClass('centerEnd').removeClass('centerStart');
 		}
 		else {
 			mag.removeClass('centerStart centerEnd');
 		}
-		if(page == 4 || page == 5 && $(this).data('done')){$('.dedicase').fadeTo(500,1);}else{//$('.dedicase').hide();
+		if(page == 2 || page == 3 && $(this).data('done')){$('.dedicase').fadeTo(500,1);}else{//$('.dedicase').hide();
 	}
 
 		  if(page == 1 && $(this).data('done')){
@@ -93,104 +196,46 @@ function createsoundbite(sound){
 var flip=createsoundbite("flip.mp3");
 //$("#magazine").turn("page",57) ;
 
+// --- Numerotation des pages -------------------------------------------------
+// La page 1 affichee est le Sommaire, soit la page 5 de turn.js : ecart de 4.
+var PAGE_OFFSET = 4;
+
+function renderPageNumbers(view) {
+
+  if (!view) { return; }
+
+  var left  = view[0] - PAGE_OFFSET;
+  var right = view[1] - PAGE_OFFSET;
+
+  $("#numPageleft").html(left   >= 1 ? left  : '');
+  $("#numPageright").html(right >= 1 ? right : '');
+
+  // Un nombre a deux chiffres est plus large : on reduit la marge pour le
+  // garder aligne, et on retablit la valeur d'origine en dessous de 10.
+  $("#numPageleft").css("margin-left",   left  >= 10 ? "128px" : "130px");
+  $("#numPageright").css("margin-right", right >= 10 ? "122px" : "126px");
+}
+
 $("#magazine").bind("turning", function(event, page, view) {
 
-  //console.log(view[0]);
-  //console.log(view[1]);
-var left = view[0];
-var right = view[1];
-  if(right > 6 ) {
-    
-      if(right == 7 ) {
-      $("#numPageleft").html('');
-      $("#numPageright").html(right-6);
-      }else{
-        $("#numPageleft").html(left-6);
-        $("#numPageright").html(right-6);
-      }
-      if ((right-6) >9) {
+  renderPageNumbers(view);
 
-        $("#numPageright").css( "margin-right", "222px" );
-        
-        $("#numPageleft").css( "margin-left", "228px" );
-        } 
+  // Le menu e-boutique est masque sur la couverture et sur les pages de fin.
+  var right = view[1];
+  if (right > 0 && right <= 57) {
+    $("#menu").show();
   }
-  else{
-    
-    $("#numPageleft").html('');
-    $("#numPageright").html('');
-  }
-
- if(right > 0 ) {
-     $("#menu").show();
-      
-  }
-  else{
+  else {
     $("#menu").hide();
-    
   }
-  if(right > 58 ) {
-     $("#menu").hide();
-      
-  }
-  
 
-  
- 
-  if (page == 1 || page == 59 || page == 60 || page == 2 ) {
-  
-  }else {
+  if (page == 1 || page == 2 || page == 57 || page == 58) {
+    // pas de son sur la couverture ni sur la fin
+  }
+  else {
     flip.playclip();
   }
-  
-});
-$("#magazine").bind("turning", function(event, page, view) {
 
-  //console.log(view[0]);
-  //console.log(view[1]);
-var left = view[0];
-var right = view[1];
-  if(right > 6 ) {
-    
-      if(right == 7 ) {
-      $("#numPageleft").html('');
-      $("#numPageright").html(right-6);
-      }else{
-        $("#numPageleft").html(left-6);
-        $("#numPageright").html(right-6);
-      }
-      if ((right-6) >9) {
-
-        $("#numPageright").css( "margin-right", "122px" );
-        
-        $("#numPageleft").css( "margin-left", "128px" );
-        } 
-  }
-  else{
-    
-    $("#numPageleft").html('');
-    $("#numPageright").html('');
-  }
-
-   if(right > 0 ) {
-     $("#menu").show();
-  }
-  else{
-    $("#menu").hide(); 
-  }
-  if(right > 59 ) {
-     $("#menu").hide();  
-  }
-  
-
-  
- 
-  if (page == 1 || page == 59 || page == 60 || page == 2 ) {
-  
-  }else {
-    flip.playclip();
-  }
-  
 });
 
 
@@ -455,6 +500,8 @@ $("#jquery_jplayer_1").jPlayer("play");
      var mag = $('#magazine');
     var way = 1;
       loading.fadeOut( 2000, function() {
+       // le loader quitte le flux : la place disponible change.
+       bookFit();
        setInterval(function() {
           mag.fadeTo(500,1);
           if (way==1) {

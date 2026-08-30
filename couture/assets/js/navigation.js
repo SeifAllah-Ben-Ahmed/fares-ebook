@@ -2,7 +2,7 @@
 
 let currentPage = 1;
 
-let totalPages = 62; // Basé sur le nombre de pages dans votre HTML
+let totalPages = 60; // Basé sur le nombre de pages dans votre HTML
 
 
 
@@ -102,70 +102,17 @@ function goToPage(pageNumber) {
 
 function updatePageIndicator() {
 
-    // Définir les pages gauche et droite à afficher
+    if (typeof renderPageNumbers !== 'function') { return; }
 
-    let leftPage = currentPage - 5;
-
-    let rightPage = currentPage - 6;
-
-
-
-    // Créer le conteneur d'indicateurs s'il n'existe pas
-
-    if ($('.page-indicator-container').length === 0) {
-
-        // Insertion au début du body
-
-        $('body').prepend(`
-
-            <div class="page-indicator-container">
-
-                <div class="numPageleft"></div>
-
-                <div class="numPageright"></div>
-
-            </div>
-
-        `);
-
+    // Une seule source de verite : le renderer de script.js, alimente par la
+    // vue reelle de turn.js (page gauche + page droite). turn.js n'est pas
+    // encore initialise lors du premier appel (ready), d'ou le try/catch.
+    try {
+        renderPageNumbers($('#magazine').turn('view'));
+    } catch (e) {
+        /* pas encore initialise : le premier 'turning' fera le rendu */
     }
-
-
-
-    // Mettre à jour le contenu des indicateurs
-
-    if (leftPage > 1) {
-
-        $('.numPageright').text(`${leftPage}`);
-
-
-
-    } else {
-
-        $('.numPageright').text('');
-
-    }
-
-
-
-    if (rightPage > 1 && rightPage <= totalPages) {
-
-        $('.numPageleft').text(`${rightPage}`);
-
-
-
-    } else {
-
-        $('.numPageleft').text('');
-
-    }
-
 }
-
-
-
-
-
 
 
 // Fonction pour mettre à jour l'état des boutons de navigation

@@ -14,11 +14,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link href="assets/css/google.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="stylesheet" href="assets/js/reveal.css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+    <!-- Feuilles des widgets tiers d'abord : styles.css est la feuille du
+         site et doit pouvoir les surcharger (modales reveal responsives,
+         marge du lecteur circulaire) sans jouer sur la specificite. -->
+    <link rel="stylesheet" href="assets/js/reveal.css" />
     <link rel="stylesheet" href="assets/circleplayer/circle.skin/circle.player.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
 
   <body>

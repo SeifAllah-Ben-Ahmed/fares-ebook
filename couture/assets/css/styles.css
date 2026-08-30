@@ -1194,4 +1194,69 @@ font-family: 'Marck Script', cursive;*/
     top: 0;
     margin-top: 14px;
   }
+
+  /* --- Modales (reveal) ---------------------------------------
+     jquery.reveal.js pilote "top" en pixels : il lit topMeasure =
+     parseInt(css('top')) a l'ouverture puis pose
+     top = scrollTop + topMeasure. Impossible donc de centrer
+     verticalement en CSS -- mais reduire ce top suffit, et la
+     largeur, elle, reste entierement a nous.
+
+     Largeur fluide : left + right + width:auto laissent le
+     navigateur resoudre la largeur contre le bloc conteneur
+     initial (aucun ancetre positionne ici), au lieu des
+     520px + margin-left:-300px qui debordaient des deux cotes.
+  ------------------------------------------------------------- */
+  .reveal-modal,
+  .reveal-modal.small,
+  .reveal-modal.medium,
+  .reveal-modal.large,
+  .reveal-modal.xlarge {
+    top: 16px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    /* max-width + marges auto : sur tablette la modale garde la
+       largeur lisible du desktop au lieu de s'etirer, et l'espace
+       restant se repartit des deux cotes (les deux marges sont
+       auto, donc pas de "over-constrained" qui la collerait a
+       gauche). */
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 32px 16px 20px;
+    font-size: 14px;
+    line-height: 20px;
+    /* le contenu long (CGV, points de vente) defile dans la modale
+       plutot que d'allonger la page derriere elle. */
+    box-sizing: border-box;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* croix de fermeture : cible tactile utilisable. */
+  .reveal-modal .close-reveal-modal {
+    top: 0;
+    right: 0;
+    padding: 8px 14px;
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  /* Formulaires des modales : les deux colonnes de 250px flottantes
+     et les champs en largeur fixe passent en pleine largeur.
+     .formGroupContact n'est pas touche : il vit dans les pages du
+     livre, donc deja mis a l'echelle par bookFit(). */
+  .reveal-modal .leftbox,
+  .reveal-modal .rightbox {
+    float: none;
+    width: auto;
+    margin-left: 0;
+  }
+  .reveal-modal .formGroup input,
+  .reveal-modal .formGroup textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }

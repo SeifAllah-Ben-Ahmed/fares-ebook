@@ -100,6 +100,7 @@ footer {
   position: relative;
   margin: 0 auto;
   margin-top: -37px;
+  min-height: 90px;
   font-family: "ARBERKLEY", cursive;
   font-size: 12px;
   font-weight: bold;
@@ -122,10 +123,12 @@ footer {
 .numPageleft {
   float: left;
   margin-left: 130px;
+  min-height: 15px;
 }
 .numPageright {
   float: right;
   margin-right: 126px;
+  min-height: 15px;
 }
 #magazine {
   width: 926px;

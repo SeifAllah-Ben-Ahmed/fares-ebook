@@ -223,10 +223,10 @@ $("#magazine").bind("turning", function(event, page, view) {
   // Le menu e-boutique est masque sur la couverture et sur les pages de fin.
   var right = view[1];
   if (right > 0 && right <= 57) {
-    $("#menu").show();
+    $("#menu").css("visibility", "visible");
   }
   else {
-    $("#menu").hide();
+    $("#menu").css("visibility", "hidden");
   }
 
   if (page == 1 || page == 2 || page == 57 || page == 58) {

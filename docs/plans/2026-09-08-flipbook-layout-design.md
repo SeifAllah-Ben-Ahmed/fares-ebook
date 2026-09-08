@@ -11,6 +11,7 @@ Refine the Couture flipbook so the book and its controls feel visually balanced 
 - Prevent horizontal browser overflow while pages are turning on mobile devices.
 - Use `#ab8944` for text-link hover states throughout the flipbook.
 - Keep the initial closed-book presentation and force its first cover to turn as a rigid Turn.js page rather than bend like paper.
+- Start recentering on Turn.js's `turning` event so the book reaches its open position before the cover animation completes, avoiding a clipped post-turn frame.
 
 ## Implementation approach
 

@@ -11,11 +11,22 @@
 -------------------------------------------------- */
 #book-stage {
   width: 926px;
+  margin: 0 auto;
   position: relative;
   left: 50%;
   margin-left: -463px;
+  overflow: hidden;
   -webkit-transform-origin: 50% 0;
   transform-origin: 50% 0;
+}
+
+/* Commandes (lecteur circulaire + fleches) : collees au livre. */
+#test {
+  line-height: 0;
+  margin-top: 20px;
+}
+#test .cp-container {
+  margin-top: 10px;
 }
 
 .menu_ver {
@@ -67,6 +78,7 @@ html {
   background: #000 url("../img/bg.png");
   background-position: 50% top;
   background-repeat: no-repeat;
+  width: 100%;
 }
 
 body {
@@ -74,6 +86,7 @@ body {
   padding: 20px 0 20px;
   /*font-family: 'ARBERKLEY', cursive;*/
   overflow: hidden;
+  width: 100%;
   color: black;
 }
 
@@ -86,7 +99,7 @@ a:visited {
 
 a:hover {
   text-decoration: underline;
-  color: #956e47;
+  color: #ab8944;
 }
 
 section,
@@ -95,17 +108,17 @@ footer {
 }
 
 .numPage {
-  width: 726px;
+  width: 926px;
+  height: 650px;
   color: #000;
-  position: relative;
-  margin: 0 auto;
-  margin-top: -37px;
-  min-height: 90px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
   font-family: "ARBERKLEY", cursive;
   font-size: 12px;
   font-weight: bold;
-
-  text-align: justify;
+  pointer-events: none;
   z-index: 10000000000000000000;
 }
 
@@ -119,16 +132,31 @@ footer {
   visibility: hidden;
   z-index: 1000;
   position: relative;
+  pointer-events: auto;
 }
 .numPageleft {
-  float: left;
-  margin-left: 130px;
-  min-height: 15px;
+  position: absolute;
+  left: 24%;
+  bottom: 20px;
+  /* transform: translateX(-50%); */
 }
 .numPageright {
-  float: right;
-  margin-right: 126px;
-  min-height: 15px;
+  position: absolute;
+  left: 74%;
+  right: auto;
+  bottom: 20px;
+  /* transform: translateX(-50%); */
+}
+.numPageleft,
+.numPageright {
+  /* font-size: 15px; */
+  width: 25px;
+  line-height: 15px;
+  text-align: center;
+}
+.numPageleft:empty,
+.numPageright:empty {
+  display: none;
 }
 #magazine {
   width: 926px;
@@ -160,7 +188,7 @@ footer {
   width: 463px;
   height: 650px;
   background-color: #000;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .contenu_odd {
   background-image: -webkit-linear-gradient(
@@ -613,7 +641,7 @@ span.pageNum.right {
   color: #000;
 }
 .dedicaseCop a:hover {
-  color: #956e47;
+  color: #ab8944;
 }
 .fawzi {
   display: block;
@@ -699,8 +727,8 @@ font-family: 'Marck Script', cursive;*/
   font-size: 11px;
 }
 .sommaireListe ul li a:hover {
-  /*color: #956e47;*/
-  color: #956e47;
+  /*color: #ab8944;*/
+  color: #ab8944;
 }
 
 #magazine .page-wrapper {
@@ -972,7 +1000,7 @@ font-family: 'Marck Script', cursive;*/
 
 .btnsend:hover {
   cursor: pointer;
-  color: #956e47;
+  color: #ab8944;
 }
 .formGroupContact input {
   height: 22px;
@@ -1159,7 +1187,7 @@ font-family: 'Marck Script', cursive;*/
   box-shadow: 0 0 1px #000;
   cursor: pointer;
 }
-.view a.info: hover {
+.view a.info:hover {
   -webkit-box-shadow: 0 0 5px #000;
   -moz-box-shadow: 0 0 5px #000;
   box-shadow: 0 0 5px #000;
@@ -1175,7 +1203,8 @@ font-family: 'Marck Script', cursive;*/
     padding: 10px 0 20px;
     /* le livre mis a l'echelle tient en largeur ; on
        autorise le scroll vertical pour atteindre les
-       commandes si l'ecran est tres court. */
+       commandes si l'ecran est tres court, mais jamais
+       de scroll horizontal pendant le tourne-page. */
     overflow-x: hidden;
     /* overflow-y: auto; */
   }
@@ -1188,6 +1217,7 @@ font-family: 'Marck Script', cursive;*/
      ne les reduit que si l'ecran est trop court. */
   #test {
     margin-left: 0;
+    margin-top: -10px;
     -webkit-transform-origin: 50% 0;
     transform-origin: 50% 0;
   }

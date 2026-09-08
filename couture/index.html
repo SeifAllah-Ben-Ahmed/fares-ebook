@@ -34,7 +34,8 @@
     <div id="magazine" class="centerStart">
       <div class="cover hard"></div>
 
-      <div id="page3" class="page page_g">
+      <!-- Inside of the front cover: keep it rigid when the book closes. -->
+      <div id="page3" class="page page_g hard">
         <div class="ouvrir"></div>
       </div>
 
@@ -44,7 +45,7 @@
             “Je remercie l’équipe et les artisans, sans qui rien ne serait possible,
             dédie ce projet à mon fils Fares, à ma famille et une pensée toute
             particulière à ma mère pour son soutien moral tout au long de sa
-            création...H”
+            création”
             <br /><br />
 
             <div class="signature"></div>
@@ -1162,13 +1163,13 @@
 			</div>
 			<div id="page55" class="page page29">
 				<div class="firasIntro black  ligneSize16"> <br><br>
-				<h3 class="black">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <a data-reveal-id="venteTunisie" class="my-button" >Points de vente Tunisie</a></h3>
+				<h3 class="black">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <a data-reveal-id="venteTunisie" class="my-button" >Tunisie</a></h3>
 				</div>
 
 			</div>
 			<div id="page56" class="page page30">
 			<div class="firasIntro black  ligneSize16"> <br><br>
-				<h3 class="black"> <a data-reveal-id="venteFrance" class="my-button" >Points de vente France</a></h3>
+				<h3 class="black"> <a data-reveal-id="venteFrance" class="my-button" >France</a></h3>
 				</div>
                                                 				<div class="menu_ver" title='Sommaire'><a href="index.html#" onClick="goTo(this.id)" id="5" ><img src="assets/img/menu_ver.png"></a></div>
 
@@ -1180,7 +1181,7 @@
 
 				</div>
 				<div id="page58" class="dedicasedeb">
-							Toute l’équipe Fares vous remercie par avance de la confiance que vous lui témoignez...
+							Toute l’équipe Fares vous remercie par avance de la confiance que vous lui témoignez.
                             </br>
                            
 				</div>
@@ -1192,7 +1193,7 @@
 			</div>
 			<div id="page58" class="page page_d">
 				<div class="dedicaseFin">
-							“La valeur d’une entreprise ne provient pas juste de ses produits mais aussi des principes qui l’encouragent ...”
+							“La valeur d’une entreprise ne provient pas juste de ses produits mais aussi des principes qui l’encouragent.”
                              
 			<div class="faceb">
 
@@ -1462,34 +1463,13 @@ Du Lundi au Samedi de 9h00 à 12h30 et de  13h30 à 19h30
      <a class="close-reveal-modal">x</a>
 </div>
 
- <div id="venteTunisie" class="reveal-modal">
-     <h1>Points de vente Tunisie </h1><br>
-<p>Rue 13 Août - Boumellel <br>
-Houmt Souk-4180 Djerba <br>
-Tél : +216 25 122 717 <br>
-<b>Horaires</b> <br>
-(sur rendez-vous) Du Lundi au Vendredi de 12h00 à 14h00 et de 16h00 à 18h00, Samedi de 15h00 à 18h00, Dimanche de 13h00 à 18h00
-</p>
-<br/>
-<p><img src="http://farescouture.com/couture/assets/img/1.jpg"  width="100%"  alt=""></div>
-</p>
-     <a class="close-reveal-modal">x</a>
+  <div id="venteTunisie" class="reveal-modal">
+      <h3><a href="index.html#" onClick="goTo(this.id);$('#venteTunisie').trigger('reveal:close')" id="31" class="my-button">Prendre rendez-vous</a></h3>
+      <a class="close-reveal-modal">x</a>
 </div>
 <div id="venteFrance" class="reveal-modal">
-     <h1>Points de vente France</h1><br>
-     <p><strong>Ouverture prochaine !</strong></p>
-<!--<p>SON ET IMAGE <br>
-71, Rue Quincampoix<br>
-Paris  75003 <br>
-<b>Horaires </b><br>
-Du Lundi au Samedi de 9h00 à 19h00 <br>
-<b>Transport</b> <br>
-Métro : Rambuteau (ligne 11),  Hôtel de Ville (ligne 1 et 11), Etienne Marcel  (ligne 4)<br>
-Gare RER Chatelet – Les Halles<br>
-Tél : +33 (0)6.95.87.67.38 
-</p>-->
-
-     <a class="close-reveal-modal">x</a>
+      <h3><a href="index.html#" onClick="goTo(this.id);$('#venteFrance').trigger('reveal:close')" id="31" class="my-button">Prendre rendez-vous</a></h3>
+      <a class="close-reveal-modal">x</a>
 </div>  
 		<div id="test">
 			<div id="jquery_jplayer_1" class="cp-jplayer"></div>

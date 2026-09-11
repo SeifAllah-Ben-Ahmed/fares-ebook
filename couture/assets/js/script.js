@@ -19,6 +19,7 @@
 var BOOK_WIDTH = 926; // largeur figee de #magazine
 var CONTROLS_MIN_SCALE = 0.7; // en dessous, les fleches ne sont plus cliquables
 var TOP_GAP = 60; // espace propre au-dessus du livre : change juste ce chiffre
+var LOGO_DELAY = 1000; // pause (ms) entre le fond et le logo du loader
 
 window.__bookScale = 1;
 
@@ -137,6 +138,43 @@ if (document.fonts && document.fonts.ready) {
     bookFit();
   });
 }
+// Loader plein ecran (fond + logo en un seul bloc) : on ne l'affiche que
+// quand son image est prete, pour ne plus voir le fond apparaitre seul.
+$(function () {
+  var loadingBox = $(".loading");
+  var loadingImg = loadingBox.find("img");
+  var logoReady = !loadingImg.length || loadingImg[0].complete;
+  var bgReady = false;
+  var bgShown = false;
+  function showBg() {
+    if (bgReady && !bgShown && loadingBox.css("display") !== "none") {
+      bgShown = true;
+      loadingBox.stop(true).fadeTo(400, 1);
+      if (logoReady) revealLogo();
+    }
+  }
+  function revealLogo() {
+    setTimeout(function () {
+      loadingImg.stop(true).fadeTo(400, 1);
+    }, LOGO_DELAY);
+  }
+  if (loadingImg.length && !logoReady) {
+    loadingImg.on("load", function () {
+      logoReady = true;
+      if (bgShown) revealLogo();
+    });
+  }
+  var bgProbe = new Image();
+  bgProbe.onload = bgProbe.onerror = function () {
+    bgReady = true;
+    showBg();
+  };
+  bgProbe.src = "assets/img/bg.png";
+  if (bgProbe.complete) {
+    bgReady = true;
+    showBg();
+  }
+});
 
 $(function () {
   $("#menu").click(function () {
@@ -546,6 +584,9 @@ $(window).load(function () {
   var loading = $(".loading");
   var mag = $("#magazine");
   var way = 1;
+  // Le fond de page est pose sous le loader opaque : invisible au moment
+  // du changement, puis les deux (fond + logo) fondus sortent ensemble.
+  $("html").addClass("bg-on");
   loading.fadeOut(2000, function () {
     // le loader quitte le flux : la place disponible change.
     bookFit();

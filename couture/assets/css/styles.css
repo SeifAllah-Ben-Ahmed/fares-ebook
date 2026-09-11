@@ -20,10 +20,13 @@
   transform-origin: 50% 0;
 }
 
-/* Commandes (lecteur circulaire + fleches) : collees au livre. */
+/* Commandes (lecteur circulaire + fleches) : collees au livre.
+   opacity:0 au depart (le layout est garde pour bookFit) : elles
+   apparaissent en meme temps que le livre, pas avant. */
 #test {
   line-height: 0;
   margin-top: 20px;
+  opacity: 0;
 }
 #test .cp-container {
   margin-top: 10px;

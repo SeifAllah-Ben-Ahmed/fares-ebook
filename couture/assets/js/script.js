@@ -592,6 +592,7 @@ $(window).load(function () {
     bookFit();
     setInterval(function () {
       mag.fadeTo(500, 1);
+      $("#test").fadeTo(500, 1);
       if (way == 1) {
         if ($("#magazine").turn("page") == 14) {
           way = 2;

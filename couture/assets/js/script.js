@@ -80,8 +80,11 @@ function bookFit() {
 
   // 2. Si la hauteur ne suit pas (mobile en paysage), on reduit d'abord les
   //    commandes -- sans les rendre intouchables -- puis le livre.
-  //    TOP_GAP est reserve en haut pour l'espace propre.
-  var fitHeight = availHeight - TOP_GAP;
+  //    Le "pousse en bas" (TOP_GAP) est desktop uniquement (min-width: 969px,
+  //    miroir du breakpoint mobile a 968px dans styles.css).
+  var isDesktop = window.matchMedia("(min-width: 969px)").matches;
+  var topGap = isDesktop ? TOP_GAP : 0;
+  var fitHeight = availHeight - topGap;
   if (stageHeight * bookScale + gap + controlsHeight > fitHeight) {
     if (controlsHeight) {
       controlsScale = Math.max(
@@ -108,11 +111,16 @@ function bookFit() {
     scaleBlock(controls, controlsScale, controlsHeight);
   }
 
-  // 3. Pousse en bas : TOP_GAP garanti en haut, le reste au-dessus aussi.
+  // 3. Desktop : pousse en bas (TOP_GAP garanti en haut).
+  //    Mobile : comportement d'origine (centrage vertical).
   var slack =
     fitHeight -
     (stageHeight * bookScale + gap + controlsHeight * controlsScale);
-  stage.style.marginTop = Math.round(TOP_GAP + Math.max(0, slack)) + "px";
+  if (isDesktop) {
+    stage.style.marginTop = Math.round(topGap + Math.max(0, slack)) + "px";
+  } else if (slack > 0) {
+    stage.style.marginTop = Math.round(slack / 2) + "px";
+  }
 }
 
 $(bookFit);

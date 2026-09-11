@@ -15,7 +15,7 @@
   position: relative;
   left: 50%;
   margin-left: -463px;
-  overflow: hidden;
+  overflow: visible;
   -webkit-transform-origin: 50% 0;
   transform-origin: 50% 0;
 }
@@ -503,7 +503,6 @@ span.pageNum.right {
   width: 153px;
   height: 72px;
   margin: 0 auto;
-  margin-top: -25px;
   margin-right: 0px;
   background-image: url("../img/farid.png");
   background-position: 50% top;

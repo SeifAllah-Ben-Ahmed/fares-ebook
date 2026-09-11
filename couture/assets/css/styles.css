@@ -47,7 +47,7 @@
 .menu_ver_droite a {
   display: inline-block;
   line-height: 0;
-  background-image: url("../img/menu_ver_2.png");
+  /* background-image: url("../img/menu_ver_2.png"); */
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;

@@ -18,6 +18,7 @@
 ------------------------------------------------------------- */
 var BOOK_WIDTH = 926; // largeur figee de #magazine
 var CONTROLS_MIN_SCALE = 0.7; // en dessous, les fleches ne sont plus cliquables
+var TOP_GAP = 60; // espace propre au-dessus du livre : change juste ce chiffre
 
 window.__bookScale = 1;
 
@@ -79,19 +80,21 @@ function bookFit() {
 
   // 2. Si la hauteur ne suit pas (mobile en paysage), on reduit d'abord les
   //    commandes -- sans les rendre intouchables -- puis le livre.
-  if (stageHeight * bookScale + gap + controlsHeight > availHeight) {
+  //    TOP_GAP est reserve en haut pour l'espace propre.
+  var fitHeight = availHeight - TOP_GAP;
+  if (stageHeight * bookScale + gap + controlsHeight > fitHeight) {
     if (controlsHeight) {
       controlsScale = Math.max(
         CONTROLS_MIN_SCALE,
         Math.min(
           1,
-          (availHeight - gap - stageHeight * bookScale) / controlsHeight,
+          (fitHeight - gap - stageHeight * bookScale) / controlsHeight,
         ),
       );
     }
     bookScale = Math.min(
       bookScale,
-      (availHeight - gap - controlsHeight * controlsScale) / stageHeight,
+      (fitHeight - gap - controlsHeight * controlsScale) / stageHeight,
     );
   }
   if (!(bookScale > 0)) {
@@ -105,17 +108,27 @@ function bookFit() {
     scaleBlock(controls, controlsScale, controlsHeight);
   }
 
-  // 3. Centrage vertical de l'ensemble livre + commandes s'il reste de la place.
+  // 3. Pousse en bas : TOP_GAP garanti en haut, le reste au-dessus aussi.
   var slack =
-    availHeight -
+    fitHeight -
     (stageHeight * bookScale + gap + controlsHeight * controlsScale);
-  if (slack > 0) {
-    stage.style.marginTop = Math.round(slack / 2) + "px";
-  }
+  stage.style.marginTop = Math.round(TOP_GAP + Math.max(0, slack)) + "px";
 }
 
 $(bookFit);
 $(window).on("resize orientationchange", bookFit);
+// Le premier appel (DOM ready) tombe souvent avant images/fonts/turn.js :
+// on rejoue des que tout est pret + retries, sinon seul un resize corrige.
+$(window).on("load", function () {
+  bookFit();
+  setTimeout(bookFit, 300);
+  setTimeout(bookFit, 1000);
+});
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(function () {
+    bookFit();
+  });
+}
 
 $(function () {
   $("#menu").click(function () {

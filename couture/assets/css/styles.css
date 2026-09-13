@@ -1228,7 +1228,7 @@ font-family: 'Marck Script', cursive;*/
        autorise le scroll vertical pour atteindre les
        commandes si l'ecran est tres court, mais jamais
        de scroll horizontal pendant le tourne-page. */
-    overflow-x: hidden;
+    overflow: hidden;
     /* overflow-y: auto; */
   }
   /* .loading est un overlay fixe (voir regle principale) : rien ici. */

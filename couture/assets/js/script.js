@@ -19,7 +19,9 @@
 var BOOK_WIDTH = 926; // largeur figee de #magazine
 var CONTROLS_MIN_SCALE = 0.7; // en dessous, les fleches ne sont plus cliquables
 var TOP_GAP = 60; // espace propre au-dessus du livre : change juste ce chiffre
-var LOGO_DELAY = 1000; // pause (ms) entre le fond et le logo du loader
+var LOGO_DELAY = 1800; // pause (ms) entre le fond et le logo du loader
+var LOADER_HOLD = 3500; // duree mini (ms) bg + logo visibles avant le livre
+var FADE_SLOW = 1200; // fondus lents du loader
 
 window.__bookScale = 1;
 
@@ -149,13 +151,14 @@ $(function () {
   function showBg() {
     if (bgReady && !bgShown && loadingBox.css("display") !== "none") {
       bgShown = true;
-      loadingBox.stop(true).fadeTo(400, 1);
+      window.__loaderShownAt = Date.now();
+      loadingBox.stop(true).fadeTo(FADE_SLOW, 1);
       if (logoReady) revealLogo();
     }
   }
   function revealLogo() {
     setTimeout(function () {
-      loadingImg.stop(true).fadeTo(400, 1);
+      loadingImg.stop(true).fadeTo(FADE_SLOW, 1);
     }, LOGO_DELAY);
   }
   if (loadingImg.length && !logoReady) {
@@ -577,36 +580,51 @@ function goTo(num) {
   //$('.jcarousel').jcarouselAutoscroll('start');
 }
 
-$(window).load(function () {
-  //console.log('charged');
-  //
-  $("#jquery_jplayer_1").jPlayer("play");
+function hideLoader() {
   var loading = $(".loading");
+  if (!loading.length || loading.data("done")) return;
+  loading.data("done", true);
   var mag = $("#magazine");
   var way = 1;
   // Le fond de page est pose sous le loader opaque : invisible au moment
   // du changement, puis les deux (fond + logo) fondus sortent ensemble.
   $("html").addClass("bg-on");
-  loading.fadeOut(2000, function () {
-    // le loader quitte le flux : la place disponible change.
-    bookFit();
-    setInterval(function () {
-      mag.fadeTo(500, 1);
-      $("#test").fadeTo(500, 1);
-      if (way == 1) {
-        if ($("#magazine").turn("page") == 14) {
-          way = 2;
-          $("#magazine").turn("options", { turnCorners: "tl,tr" });
+  // Sequence garantie : bg -> logo cheval -> livre. On attend la fin du
+  // hold mini avant de sortir le loader, meme si window.load arrive tot.
+  var elapsed = window.__loaderShownAt
+    ? Date.now() - window.__loaderShownAt
+    : LOADER_HOLD;
+  var wait = Math.max(0, LOADER_HOLD - elapsed);
+  setTimeout(function () {
+    loading.fadeOut(2500, function () {
+      // le loader quitte le flux : la place disponible change.
+      bookFit();
+      setInterval(function () {
+        mag.fadeTo(500, 1);
+        $("#test").fadeTo(500, 1);
+        if (way == 1) {
+          if ($("#magazine").turn("page") == 14) {
+            way = 2;
+            $("#magazine").turn("options", { turnCorners: "tl,tr" });
+          }
+        } else {
+          if ($("#magazine").turn("page") == 1) {
+            way = 1;
+            $("#magazine").turn("options", { turnCorners: "bl,br" });
+          }
         }
-      } else {
-        if ($("#magazine").turn("page") == 1) {
-          way = 1;
-          $("#magazine").turn("options", { turnCorners: "bl,br" });
-        }
-      }
-    }, 100);
-  });
+      }, 100);
+    });
+  }, wait);
+}
+$(window).load(function () {
+  try {
+    $("#jquery_jplayer_1").jPlayer("play");
+  } catch (e) {}
+  hideLoader();
 });
+// Securite : le livre apparait toujours, meme si window.load ne part jamais.
+setTimeout(hideLoader, 9000);
 $("#sur-rendez-vousbtn").live("click", function (e) {
   e.preventDefault();
   $("#rendez-vousErreur").html("");

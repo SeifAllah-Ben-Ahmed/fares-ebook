@@ -892,10 +892,12 @@ font-family: 'Marck Script', cursive;*/
   overflow: hidden;
   width: 339px;
   height: 512px;
+  /* box-sizing: border-box; */
 }
 
 .jcarousel ul {
   width: 20000em;
+  /* left: 0; */
   position: relative;
   list-style: none;
   margin: 0;
@@ -904,6 +906,7 @@ font-family: 'Marck Script', cursive;*/
 
 .jcarousel li {
   float: left;
+  width: 339px;
 }
 
 /** Carousel Controls **/

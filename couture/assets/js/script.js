@@ -316,49 +316,47 @@ $(function () {
     }
   });
 
-  $("#magazine").bind("start", function (event, pageObject, corner) {
-    $(".jcarousel")
-      .jcarousel({
-        wrap: "circular",
-      })
-      .jcarouselAutoscroll({
-        interval: 2000,
-        target: "+=1",
-        autostart: true,
-      });
-    $(".jcarousel").mouseover(function () {
-      $(".imageorigine").hide();
-      $(".imagehover").show();
-      //$('#commande').foundation('reveal', 'open');
-      $(".jcarousel").jcarouselAutoscroll("stop");
+  function initJCarousel() {
+    var $c = $(".jcarousel");
+    var $ul = $c.find("ul");
+    var W = 339;
+    var len = $c.find("li").length;
+    var timer = $c.data("jcTimer") || null;
+    function getCur(){ return $c.data("jcCur") || 0; }
+    function setCur(v){ $c.data("jcCur", v); }
+    function go(idx, dur) {
+      if (len === 0) return;
+      var cur = (idx % len + len) % len;
+      setCur(cur);
+      if ($ul.is(":animated")) return;
+      $ul.stop(true).animate({ left: -cur * W + "px" }, dur || 400);
+    }
+    function startAuto() {
+      stopAuto();
+      timer = setInterval(function () { go(getCur() + 1, 400); }, 2000);
+      $c.data("jcTimer", timer);
+    }
+    function stopAuto() { var t=$c.data("jcTimer"); if (t) { clearInterval(t); $c.removeData("jcTimer"); } }
+    if ($c.data("_jcFixed")) { var cur0=getCur(); $c.find("li").css("width", W + "px"); $ul.css({ left: -cur0 * W + "px", width: len * W + 800 + "px" }); return; }
+    $c.data("_jcFixed", true);
+    try { if ($c.data("jcarousel")) $c.jcarousel("destroy"); } catch(e) {}
+    try { $c.jcarouselAutoscroll("stop"); } catch(e) {}
+    $c.find("li").css("width", W + "px");
+    $ul.css({ left: "0px", width: len * W + 800 + "px" });
+    $c.css({ overflow: "hidden" });
+    $(".jcarousel-control-prev").off(".jcarouselcontrol click.jc").on("click.jc", function (e) { e.preventDefault(); stopAuto(); go(getCur() - 1, 250); startAuto(); });
+    $(".jcarousel-control-next").off(".jcarouselcontrol click.jc").on("click.jc", function (e) { e.preventDefault(); stopAuto(); go(getCur() + 1, 250); startAuto(); });
+    $c.off("mouseover.jc mouseout.jc").on("mouseover.jc", function () {
+      $(".imageorigine").hide(); $(".imagehover").show(); stopAuto();
+    }).on("mouseout.jc", function () {
+      $(".imageorigine").show(); $(".imagehover").hide(); startAuto();
     });
-    $(".jcarousel").mouseout(function () {
-      $(".imageorigine").show();
-      $(".imagehover").hide();
-
-      $(".jcarousel").jcarouselAutoscroll("start");
-    });
-    $(".jcarousel-control-prev")
-      .on("jcarouselcontrol:active", function () {
-        $(this).removeClass("inactive");
-      })
-      .on("jcarouselcontrol:inactive", function () {
-        $(this).addClass("inactive");
-      })
-      .jcarouselControl({
-        target: "-=1",
-      });
-
-    $(".jcarousel-control-next")
-      .on("jcarouselcontrol:active", function () {
-        $(this).removeClass("inactive");
-      })
-      .on("jcarouselcontrol:inactive", function () {
-        $(this).addClass("inactive");
-      })
-      .jcarouselControl({
-        target: "+=1",
-      });
+    $(window).off("resize.jc orientationchange.jc").on("resize.jc orientationchange.jc", function () { $ul.css("left", -getCur() * W + "px"); });
+    startAuto();
+  }
+  $(initJCarousel);
+  $("#magazine").bind("start", function () {
+    initJCarousel();
   });
   $("#menu").click(function () {
     //goTo (7);

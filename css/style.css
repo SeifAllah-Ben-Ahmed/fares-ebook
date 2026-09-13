@@ -8,10 +8,10 @@
 }
 
 body {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   background-color: #000;
   color: #fff;
-  overflow-x: hidden;
+  overflow: hidden;
   text-align: center;
   height: 100vh;
   width: 100%;
@@ -58,7 +58,7 @@ header {
 .img-responsive {
   max-width: 100%;
   height: auto;
-  margin-bottom:-20px; /* Reduced space between logo and navigation */
+  margin-bottom: -20px; /* Reduced space between logo and navigation */
   transition: all 0.5s ease;
 }
 
@@ -100,7 +100,9 @@ header {
   width: 100%;
 }
 
-.t0, .t1, .t2 {
+.t0,
+.t1,
+.t2 {
   display: inline-block;
   margin: 0 10px;
   vertical-align: middle;
@@ -119,9 +121,9 @@ a:hover img {
 @media (max-width: 768px) {
   .img-responsive {
     width: 80%;
-    margin-bottom:-20px; /* Further reduced for mobile */
+    margin-bottom: -20px; /* Further reduced for mobile */
   }
-  
+
   /* Keep navigation in a single line on mobile */
   .titles-align {
     flex-direction: row;
@@ -129,17 +131,20 @@ a:hover img {
     justify-content: center;
     margin-top: 5px; /* Minimal spacing on mobile */
   }
-  
-  .t0, .t1, .t2 {
+
+  .t0,
+  .t1,
+  .t2 {
     margin: 0 5px;
   }
-  
+
   /* Scale down navigation images slightly for better fit */
-  .t1 img, .t2 img {
+  .t1 img,
+  .t2 img {
     max-width: 100%;
     height: auto;
   }
-  
+
   /* Adjust vertical position for mobile */
   #container {
     top: -13vh; /* Less extreme but still higher on mobile */
@@ -149,9 +154,9 @@ a:hover img {
 @media (max-width: 480px) {
   .img-responsive {
     width: 90%;
-    margin-bottom:-20px; /* Minimal spacing on small mobile */
+    margin-bottom: -20px; /* Minimal spacing on small mobile */
   }
-  
+
   /* Ensure navigation stays on one line even on very small screens */
   .titles-align {
     width: 100%;
@@ -159,16 +164,18 @@ a:hover img {
     padding: 0 5px;
     margin-top: 2px; /* Almost no space on smallest screens */
   }
-  
-  .t0, .t1, .t2 {
+
+  .t0,
+  .t1,
+  .t2 {
     margin: 0 3px;
     transform: scale(0.9); /* Slightly reduce size on very small screens */
   }
-  
+
   .t0 img {
     height: 14px; /* Slightly reduce the size of the divider */
   }
-  
+
   /* Adjust vertical positioning for mobile */
   #container {
     top: -13vh; /* Slightly less extreme on smallest screens */
@@ -214,13 +221,13 @@ a:hover img {
 
 /* Optional: Adding a subtle grain texture to the background */
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzR7G6VFjTMyYGzOWxJwbEz+XeNcT8yS+s8eY8TZymYwRk8Vxs/2fNGMZRoiIeCbqH6oAU6SSWeUVoAMAAAAASUVORK5CYII=');
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzR7G6VFjTMyYGzOWxJwbEz+XeNcT8yS+s8eY8TZymYwRk8Vxs/2fNGMZRoiIeCbqH6oAU6SSWeUVoAMAAAAASUVORK5CYII=");
   opacity: 0.02;
   z-index: -1;
 }

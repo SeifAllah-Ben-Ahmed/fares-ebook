@@ -180,9 +180,9 @@ $(function () {
 });
 
 $(function () {
-  $("#menu").click(function () {
-    //goTo (7);
-    window.open("http://farescouture.com/fares-boutique/", "_self");
+  $("#menu").click(function (e) {
+    e.preventDefault();
+    goTo(5);
   });
 
   var mag = $("#magazine");
@@ -358,9 +358,9 @@ $(function () {
   $("#magazine").bind("start", function () {
     initJCarousel();
   });
-  $("#menu").click(function () {
-    //goTo (7);
-    window.open("http://farescouture.com/fares-boutique/", "_self");
+  $("#menu").click(function (e) {
+    e.preventDefault();
+    goTo(5);
   });
 
   $("#radioForm input[type=radio]").live("change", function () {

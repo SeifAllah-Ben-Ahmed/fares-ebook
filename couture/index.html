@@ -192,7 +192,7 @@
           <br />
           <h3 class="black">Prises de commande/Mesures</h3>
           <p>
-            Elle se fait soit au show-room, à domicile, au bureau <a data-reveal-id="sur-commande" class="my-button">sur rendez-vous</a>
+            Elle se fait soit au show-room, à domicile, au bureau <a href="index.html#" onClick="goTo(31); return false;" class="my-button">Convenir d’un rendez-vous</a>
             ou parmi nos distributeurs pour <a data-reveal-id="grand-mesure" class="my-button">la grande mesure*</a>
             ou au show-room pour <a data-reveal-id="demi-mesure" class="my-button">la demi-mesure*</a>
             et <a data-reveal-id="petit-mesure" class="my-button">la petite mesure*.</a>
@@ -319,7 +319,7 @@
 					<p><b>. Qualité</b> </p>
 					<p>Ils sont montés par des artisans passionnés et expérimentés...<br> Un certificat d’authentification est délivré. </p>
 					<p><b>. Prise de la commande</b></p>
-					<P> <a data-reveal-id="sur-commande" class="my-button">Sur rendez-vous</a> au <a data-reveal-id="show-room" class="my-button" >show-room</a></P>
+					<P><a href="index.html#" onClick="goTo(31); return false;" class="my-button">Convenir d’un rendez-vous</a></P>
 					<p><b>.Produits proposés</b></p>
 					<P> Collier, bracelet, bague, boucle d’oreille, pendentif, broche, boutons de manchette...</P>
 					<p><b>Délai de livraison </b></p>
@@ -752,7 +752,7 @@
 							<h1 class="black">Mariage - Cérémonie</h1>
 							<p>Notre maison se fera un plaisir de vous accompagner durant cet heureux évènement.</p>
 
-							<p>Vous pouvez vous rendre à <a data-reveal-id="show-room" class="my-button">notre show room</a>, chez <a data-reveal-id="nos-dist" class="my-button" >nos distrubuteurs</a> ou <a data-reveal-id="sur-commande" class="my-button">bien à domicile</a> sur rendez-vous afin de bénéficier de conseils et services personnalisés.</p>
+							<p>Vous pouvez vous rendre à <a data-reveal-id="show-room" class="my-button">notre show room</a>, chez <a data-reveal-id="nos-dist" class="my-button" >nos distrubuteurs</a> ou <a data-reveal-id="sur-commande" class="my-button">bien à domicile</a> afin de bénéficier de conseils et services personnalisés.</p>
 							<p>Fares se propose d'harmoniser votre tenue avec la robe de la mariée en reprenant des éléments, des détails, les couleurs par le gilet, l'ascott.</p>
 							<p>Nous pouvons également créer les tenues des deux mariés à partir d'un thème, d'un lieu ou selon que l'événement soit formel ou amical, traditionnel ou original.</p>
 							
@@ -1235,17 +1235,7 @@
 
 <div id="show-room" class="reveal-modal">
      <h1>Show-room</h1><br>
-<h2><b>France :</b></h2>
-<p>« Prochainement… »
-</p>
-<h2><b>Tunisie :</b></h2>
-<p>Rue 13 Août - Boumellel <br>
-Houmt Souk-4180 Djerba <br>
-Tél : 75.620.896 / 24.871.263 <br>
-<b>Horaires</b> <br>
-Du Lundi au Samedi de 9h00 à 12h30 et de  13h30 à 19h30
-</p>
-
+<p><a href="index.html#" onClick="goTo(31); $('#show-room').trigger('reveal:close'); return false;" class="my-button">Convenir d’un rendez-vous</a></p>
      <a class="close-reveal-modal">x</a>
 </div>
 <div id="commande" class="reveal-modal">
@@ -1288,48 +1278,11 @@ Du Lundi au Samedi de 9h00 à 12h30 et de  13h30 à 19h30
 </div>
 <div id="nos-dist" class="reveal-modal">
      <h1>Nos distributeurs : </h1><br>
-     <h2><b>Tunisie :</b></h2>
-<p>Rue 13 Août - Boumellel <br>
-Houmt Souk-4180 Djerba <br>
-Tél : 75.620.896 / 24.871.263 <br>
-<b>Horaires</b> <br>
-Du Lundi au Samedi de 9h00 à 12h30 et de  13h30 à 19h30
-</p>
+<p><a href="index.html#" onClick="goTo(31); $('#nos-dist').trigger('reveal:close'); return false;" class="my-button">Demandez la boutique la plus proche</a></p>
      <a class="close-reveal-modal">x</a>
 </div>
 <div id="sur-commande" class="reveal-modal">
-     <div id='contenuCommande'>
-		<form>
-		<div class="leftbox">
-				<div class="formGroup">
-					  
-					    <input type="text" placeholder="Nom">
-				</div> 
-				<div class="formGroup">
-					    <input type="text" placeholder="Email">
-				</div>	
-		</div>
-		<div class="rightbox">
-					<div class="formGroup">
-				   
-				    <input type="text" placeholder="Prenom">
-				</div>
-				
-				<div class="formGroup">
-				   
-				    <input type="text" placeholder="Tel">
-				</div>	
-		</div>
-		<div>
-			<div class="formGroup">
-				<textarea rows="5" cols="71" placeholder="Message"></textarea>
-			</div>	
-		</div>	
-		<div class="formGroup">
-			<div class="btnsend">Envoyer</div>
-		</div>	  
-		</form>
-		</div>
+<p><a href="index.html#" onClick="goTo(31); $('#sur-commande').trigger('reveal:close'); return false;" class="my-button">Convenir d’un rendez-vous</a></p>
      <a class="close-reveal-modal">x</a>
 </div>
 <div id="sur-rendez-vous" class="reveal-modal">
@@ -1467,11 +1420,12 @@ Du Lundi au Samedi de 9h00 à 12h30 et de  13h30 à 19h30
 </div>
 
   <div id="venteTunisie" class="reveal-modal">
-      <h3><a href="index.html#" onClick="goTo(this.id);$('#venteTunisie').trigger('reveal:close')" id="31" class="my-button">Prendre rendez-vous</a></h3>
+	  <h3><a href="index.html#" onClick="goTo(this.id);$('#venteTunisie').trigger('reveal:close')" id="31" class="my-button">Demandez la boutique la plus proche</a></h3>
+      <img src="assets/img/1.jpg" alt="Boutique" style="width:100%;height:auto;display:block;margin-top:12px;">
       <a class="close-reveal-modal">x</a>
 </div>
 <div id="venteFrance" class="reveal-modal">
-      <h3><a href="index.html#" onClick="goTo(this.id);$('#venteFrance').trigger('reveal:close')" id="31" class="my-button">Prendre rendez-vous</a></h3>
+      <h3><a href="index.html#" onClick="goTo(this.id);$('#venteFrance').trigger('reveal:close')" id="31" class="my-button">Demandez la boutique la plus proche</a></h3>
       <a class="close-reveal-modal">x</a>
 </div>  
 		<div id="test">

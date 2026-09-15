@@ -56,7 +56,7 @@ header {
 
 /* Additional Structural Adjustments for Centered Layout */
 .img-responsive {
-  max-width: 100%;
+  max-width: 80%;
   height: auto;
   margin-bottom: -20px; /* Reduced space between logo and navigation */
   transition: all 0.5s ease;
@@ -98,6 +98,7 @@ header {
   flex-wrap: nowrap; /* Prevent wrapping to ensure single line */
   position: relative;
   width: 100%;
+  gap: 10px;
 }
 
 .t0,
@@ -114,13 +115,29 @@ a img {
   transition: all 0.3s ease;
 }
 
+/* Reduced nav image sizes - desktop (20% smaller) */
+.t1 img {
+  width: 120px;
+  height: auto;
+}
+
+.t2 img {
+  width: 128px;
+  height: auto;
+}
+
+.t0 img {
+  height: 13px;
+  width: auto;
+}
+
 a:hover img {
   transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
   .img-responsive {
-    width: 80%;
+    width: 64%;
     margin-bottom: -20px; /* Further reduced for mobile */
   }
 
@@ -139,8 +156,14 @@ a:hover img {
   }
 
   /* Scale down navigation images slightly for better fit */
-  .t1 img,
+  .t1 img {
+    width: 120px;
+    max-width: 100%;
+    height: auto;
+  }
+
   .t2 img {
+    width: 128px;
     max-width: 100%;
     height: auto;
   }
@@ -153,8 +176,9 @@ a:hover img {
 
 @media (max-width: 480px) {
   .img-responsive {
-    width: 90%;
-    margin-bottom: -20px; /* Minimal spacing on small mobile */
+    width: 72%;
+    max-width: 72%;
+    margin-bottom: -20px; /* 20% smaller than original 90% */
   }
 
   /* Ensure navigation stays on one line even on very small screens */
@@ -169,11 +193,22 @@ a:hover img {
   .t1,
   .t2 {
     margin: 0 3px;
-    transform: scale(0.9); /* Slightly reduce size on very small screens */
+    transform: none;
   }
 
   .t0 img {
-    height: 14px; /* Slightly reduce the size of the divider */
+    height: 11px; /* 20% smaller than original 14px at this breakpoint */
+    width: auto;
+  }
+
+  .t1 img {
+    width: 96px; /* 20% smaller than desktop 120px */
+    height: auto;
+  }
+
+  .t2 img {
+    width: 102px; /* 20% smaller than desktop 128px */
+    height: auto;
   }
 
   /* Adjust vertical positioning for mobile */
@@ -193,7 +228,7 @@ a:hover img {
 }
 
 #container {
-  animation: fadeIn 8s;
+  animation: fadeIn 1.5s;
 }
 
 /* Gold Accent Color - Used for Hover States */

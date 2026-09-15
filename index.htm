@@ -93,8 +93,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
       $(document).ready(function () {
-        $("#container").fadeIn(8000);
+        $("#container").fadeIn(1200);
       });
+
+      // Auto-redirect to boutique after 5s - disabled on localhost
+      (function () {
+        var h = window.location.hostname;
+        var isLocal =
+          !h ||
+          h === "localhost" ||
+          h === "127.0.0.1" ||
+          h === "::1" ||
+          h === "0.0.0.0" ||
+          h === "" ||
+          window.location.protocol === "file:";
+        if (!isLocal) {
+          setTimeout(function () {
+            window.location.href = "http://farescouture.com/fares-boutique/";
+          }, 5000);
+        }
+      })();
     </script>
 
     <style>
@@ -125,8 +143,10 @@
                   <img
                     src="images/couture_blanc.png"
                     name="Image1"
-                    width="150"
-                    height="10"
+                    width="120"
+                    height="8"
+                    //width="150"
+                    //height="10"
                     border="0"
                     alt="Couture"
                   />
@@ -136,7 +156,8 @@
               <div class="t0">
                 <img
                   src="images/makroud.png"
-                  height="16"
+                  height="13"
+                  //height="16"
                   border="0"
                   alt="separator"
                 />
@@ -151,8 +172,10 @@
                   <img
                     src="images/eboutique_blanc.png"
                     name="Image2"
-                    width="160"
-                    height="11"
+                    width="128"
+                    height="9"
+                    //width="160"
+                    //height="11"
                     border="0"
                     alt="Boutique"
                   />

@@ -28,8 +28,8 @@
 		$Body .="message : $message";
 
 // send prepared message
-//$emailTo="faouzi.harrazi@gmail.com";
-$emailTo="recrutement@farescouture.com";
+$emailTo="faouzi.harrazi@gmail.com";
+// $emailTo="recrutement@farescouture.com";
 
 $subject=$_REQUEST['sujet'];
 //$Body="teste corps";

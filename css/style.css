@@ -98,7 +98,6 @@ header {
   flex-wrap: nowrap; /* Prevent wrapping to ensure single line */
   position: relative;
   width: 100%;
-  gap: 10px;
 }
 
 .t0,

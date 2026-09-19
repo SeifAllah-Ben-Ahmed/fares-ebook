@@ -300,7 +300,7 @@ span.pageNum.right {
   background-repeat: no-repeat;
 }
 #magazine .end {
-  background: #000 url("../img/end.jpg");
+  background: #000 url("../img/Page de couverture dorée verso livre.png");
   background-position: 50% top;
   background-repeat: no-repeat;
 }
@@ -356,7 +356,7 @@ span.pageNum.right {
 }
 
 #magazine .pretAporter {
-  background: #000 url("../img/pret_a_porter.jpg");
+  background: #000 url("../img/Prêt à porter page gauche.jpg");
   background-position: 50% top;
   background-repeat: no-repeat;
 }

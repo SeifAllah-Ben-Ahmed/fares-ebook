@@ -96,7 +96,7 @@
         $("#container").fadeIn(1200);
       });
 
-      // Auto-redirect to boutique after 5s - disabled on localhost
+      // Auto-redirect to boutique after 5s (with fade-out) - disabled on localhost
       (function () {
         var h = window.location.hostname;
         var isLocal =
@@ -108,9 +108,29 @@
           h === "" ||
           window.location.protocol === "file:";
         if (!isLocal) {
+          var redirectUrl = "https://farescouture.com/fares-boutique/";
+          var fadeDuration = 800;
+          var redirectDelay = 5000;
           setTimeout(function () {
-            window.location.href = "https://farescouture.com/fares-boutique/";
-          }, 5000);
+            var el = document.getElementById("container");
+            if (window.jQuery && el) {
+              el.classList.add("fade-out");
+              $("#container").fadeOut(fadeDuration, function () {
+                window.location.href = redirectUrl;
+              });
+              // Safety fallback in case fadeOut callback doesn't fire
+              setTimeout(function () {
+                window.location.href = redirectUrl;
+              }, fadeDuration + 500);
+            } else if (el) {
+              el.classList.add("fade-out");
+              setTimeout(function () {
+                window.location.href = redirectUrl;
+              }, fadeDuration);
+            } else {
+              window.location.href = redirectUrl;
+            }
+          }, redirectDelay - fadeDuration);
         }
       })();
     </script>
@@ -132,7 +152,7 @@
 
           <img class="img-responsive" src="images/fares-couture.png" alt="" />
 
-          <div class="intro-text">
+          <!-- <div class="intro-text">
             <div class="titles-align">
               <div class="t1">
                 <a
@@ -182,7 +202,7 @@
                 </a>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </header>

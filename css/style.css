@@ -56,10 +56,12 @@ header {
 
 /* Additional Structural Adjustments for Centered Layout */
 .img-responsive {
-  max-width: 80%;
+  max-width: 72%; /* Reduced by 10% from 80% */
   height: auto;
   margin-bottom: -20px; /* Reduced space between logo and navigation */
   transition: all 0.5s ease;
+  opacity: 0;
+  animation: logoFadeIn 1.5s ease forwards;
 }
 
 #container {
@@ -136,7 +138,7 @@ a:hover img {
 
 @media (max-width: 768px) {
   .img-responsive {
-    width: 64%;
+    width: 57.6%; /* Reduced by 10% from 64% */
     margin-bottom: -20px; /* Further reduced for mobile */
   }
 
@@ -175,8 +177,8 @@ a:hover img {
 
 @media (max-width: 480px) {
   .img-responsive {
-    width: 72%;
-    max-width: 72%;
+    width: 64.8%; /* Reduced by 10% from 72% */
+    max-width: 64.8%; /* 10% smaller than 72% */
     margin-bottom: -20px; /* 20% smaller than original 90% */
   }
 
@@ -226,8 +228,25 @@ a:hover img {
   }
 }
 
+/* Logo fade-in (image only) - opacity only so hover scale still works */
+@keyframes logoFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 #container {
   animation: fadeIn 1.5s;
+  transition: opacity 0.8s ease;
+}
+
+/* Fade-out state applied via JS just before redirect */
+#container.fade-out {
+  opacity: 0 !important;
+  pointer-events: none;
 }
 
 /* Gold Accent Color - Used for Hover States */

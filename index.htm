@@ -93,10 +93,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
       $(document).ready(function () {
-        $("#container").fadeIn(1200);
+        $("#container").fadeIn(700);
       });
 
-      // Auto-redirect to boutique after 5s (with fade-out) - disabled on localhost
+      // Auto-redirect to boutique after 3s (with fade-out) - disabled on localhost
       (function () {
         var h = window.location.hostname;
         var isLocal =
@@ -109,8 +109,8 @@
           window.location.protocol === "file:";
         if (!isLocal) {
           var redirectUrl = "https://farescouture.com/fares-boutique/";
-          var fadeDuration = 800;
-          var redirectDelay = 5000;
+          var fadeDuration = 500;
+          var redirectDelay = 3000;
           setTimeout(function () {
             var el = document.getElementById("container");
             if (window.jQuery && el) {
@@ -121,7 +121,7 @@
               // Safety fallback in case fadeOut callback doesn't fire
               setTimeout(function () {
                 window.location.href = redirectUrl;
-              }, fadeDuration + 500);
+              }, fadeDuration + 300);
             } else if (el) {
               el.classList.add("fade-out");
               setTimeout(function () {

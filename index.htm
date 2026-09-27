@@ -8,10 +8,21 @@
     <meta name="author" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <link
       rel="icon"
-      href="https://farescouture.com/fares-boutique/wp-content/uploads/2017/04/favicon.png"
-      type="image/x-icon"
+      type="image/png"
+      sizes="192x192"
+      href="android-chrome-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="android-chrome-512x512.png"
     />
 
     <title>
@@ -96,42 +107,42 @@
         $("#container").fadeIn(700);
       });
 
-      // Auto-redirect to boutique after 3s (with fade-out) - disabled on localhost
+      // Auto-redirect to boutique after 3s (with fade-out)
+      // NOTE: localhost guard disabled for testing - redirect runs everywhere
       (function () {
-        var h = window.location.hostname;
-        var isLocal =
-          !h ||
-          h === "localhost" ||
-          h === "127.0.0.1" ||
-          h === "::1" ||
-          h === "0.0.0.0" ||
-          h === "" ||
-          window.location.protocol === "file:";
-        if (!isLocal) {
-          var redirectUrl = "https://farescouture.com/fares-boutique/";
-          var fadeDuration = 500;
-          var redirectDelay = 3000;
-          setTimeout(function () {
-            var el = document.getElementById("container");
-            if (window.jQuery && el) {
-              el.classList.add("fade-out");
-              $("#container").fadeOut(fadeDuration, function () {
-                window.location.href = redirectUrl;
-              });
-              // Safety fallback in case fadeOut callback doesn't fire
-              setTimeout(function () {
-                window.location.href = redirectUrl;
-              }, fadeDuration + 300);
-            } else if (el) {
-              el.classList.add("fade-out");
-              setTimeout(function () {
-                window.location.href = redirectUrl;
-              }, fadeDuration);
-            } else {
+        // var h = window.location.hostname;
+        // var isLocal =
+        //   !h ||
+        //   h === "localhost" ||
+        //   h === "127.0.0.1" ||
+        //   h === "::1" ||
+        //   h === "0.0.0.0" ||
+        //   h === "" ||
+        //   window.location.protocol === "file:";
+        // if (!isLocal) {}
+        var redirectUrl = "https://farescouture.com/fares-boutique/";
+        var fadeDuration = 500;
+        var redirectDelay = 3000;
+        setTimeout(function () {
+          var el = document.getElementById("container");
+          if (window.jQuery && el) {
+            el.classList.add("fade-out");
+            $("#container").fadeOut(fadeDuration, function () {
               window.location.href = redirectUrl;
-            }
-          }, redirectDelay - fadeDuration);
-        }
+            });
+            // Safety fallback in case fadeOut callback doesn't fire
+            setTimeout(function () {
+              window.location.href = redirectUrl;
+            }, fadeDuration + 300);
+          } else if (el) {
+            el.classList.add("fade-out");
+            setTimeout(function () {
+              window.location.href = redirectUrl;
+            }, fadeDuration);
+          } else {
+            window.location.href = redirectUrl;
+          }
+        }, redirectDelay - fadeDuration);
       })();
     </script>
 

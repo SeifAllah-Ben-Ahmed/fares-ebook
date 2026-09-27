@@ -855,6 +855,16 @@ font-family: 'Marck Script', cursive;*/
 .my-button {
   cursor: pointer;
 }
+
+/* Point de vente popups : liens sans soulignement */
+#venteTunisie a.my-button,
+#venteFrance a.my-button,
+#points-ventes a.my-button,
+#venteTunisie a.my-button:hover,
+#venteFrance a.my-button:hover,
+#points-ventes a.my-button:hover {
+  text-decoration: none;
+}
 .clear {
   clear: both;
 }

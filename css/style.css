@@ -61,7 +61,7 @@ header {
   margin-bottom: -20px; /* Reduced space between logo and navigation */
   transition: all 0.5s ease;
   opacity: 0;
-  animation: logoFadeIn 0.9s ease forwards;
+  animation: logoFadeIn 0.6s ease forwards;
 }
 
 #container {
@@ -239,8 +239,8 @@ a:hover img {
 }
 
 #container {
-  animation: fadeIn 0.9s;
-  transition: opacity 0.5s ease;
+  animation: fadeIn 0.6s;
+  transition: opacity 0.4s ease;
 }
 
 /* Fade-out state applied via JS just before redirect */

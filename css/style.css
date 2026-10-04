@@ -34,14 +34,14 @@ body {
   height: 100%;
 }
 
-/* Header Styles */
+/* Header Styles - true viewport center */
 header {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin-top: -5vh; /* Pull the entire header upward */
+  margin: 0;
 }
 
 /* Content Layout Structure */
@@ -58,7 +58,7 @@ header {
 .img-responsive {
   max-width: 72%; /* Reduced by 10% from 80% */
   height: auto;
-  margin-bottom: -20px; /* Reduced space between logo and navigation */
+  margin: 0 auto; /* Center horizontally, no offset */
   transition: all 0.5s ease;
   opacity: 0;
   animation: logoFadeIn 0.6s ease forwards;
@@ -72,7 +72,9 @@ header {
   height: auto;
   width: 100%;
   position: relative;
-  top: -24vh; /* Shift everything more upward */
+  top: 0; /* True center - no vertical shift */
+  margin: 0 auto;
+  text-align: center;
 }
 
 .img-responsive:hover {
@@ -88,7 +90,7 @@ header {
   align-items: center;
   position: relative;
   width: 100%;
-  margin-left: 10px;
+  margin-left: 0;
 }
 
 /* Navigation Menu Styling */
@@ -139,7 +141,7 @@ a:hover img {
 @media (max-width: 768px) {
   .img-responsive {
     width: 57.6%; /* Reduced by 10% from 64% */
-    margin-bottom: -20px; /* Further reduced for mobile */
+    margin: 0 auto;
   }
 
   /* Keep navigation in a single line on mobile */
@@ -171,7 +173,7 @@ a:hover img {
 
   /* Adjust vertical position for mobile */
   #container {
-    top: -13vh; /* Less extreme but still higher on mobile */
+    top: 0; /* Keep true center on mobile */
   }
 }
 
@@ -179,7 +181,7 @@ a:hover img {
   .img-responsive {
     width: 64.8%; /* Reduced by 10% from 72% */
     max-width: 64.8%; /* 10% smaller than 72% */
-    margin-bottom: -20px; /* 20% smaller than original 90% */
+    margin: 0 auto;
   }
 
   /* Ensure navigation stays on one line even on very small screens */
@@ -214,7 +216,7 @@ a:hover img {
 
   /* Adjust vertical positioning for mobile */
   #container {
-    top: -13vh; /* Slightly less extreme on smallest screens */
+    top: 0; /* Keep true center on smallest screens */
   }
 }
 

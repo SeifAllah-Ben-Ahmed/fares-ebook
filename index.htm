@@ -96,7 +96,7 @@
         $("#container").fadeIn(500);
       });
 
-      // Auto-redirect to boutique after 2s (with fade-out)
+      // Auto-redirect to boutique after 3s (with fade-out)
       // NOTE: localhost guard disabled for testing - redirect runs everywhere
       (function () {
         // var h = window.location.hostname;
@@ -111,7 +111,7 @@
         // if (!isLocal) {}
         var redirectUrl = "https://farescouture.com/fares-boutique/";
         var fadeDuration = 400;
-        var redirectDelay = 2000;
+        var redirectDelay = 3000;
         setTimeout(function () {
           var el = document.getElementById("container");
           if (window.jQuery && el) {

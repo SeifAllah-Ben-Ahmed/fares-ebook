@@ -20,8 +20,7 @@
 		$Body .="message : $Message";
 
 // send prepared message
-$emailTo="contact@farescouture.com";
-//$emailTo="becasoft@live.fr";
+$emailTo="faouzi.harrazi@gmail.com";
 $subject="$sujet";
 //$Body="teste corps";
 

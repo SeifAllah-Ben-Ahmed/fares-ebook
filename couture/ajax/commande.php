@@ -25,7 +25,8 @@
 		$Body .="message : $commandeMessage";
 
 // send prepared message
-$emailTo="commande@farescouture.com";
+// $emailTo="commande@farescouture.com";
+$emailTo="faouzi.harrazi@gmail.com";
 $subject="$sujetMessage";
 //$Body="teste corps";
 
